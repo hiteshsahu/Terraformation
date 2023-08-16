@@ -94,7 +94,7 @@ Remove a log stream
 
 Commnet out resource you want to destroy and run apply OR run
 
- > terraform **destroy**
+ > terraform **destroy**  --auto-approve 
 
  ----
  

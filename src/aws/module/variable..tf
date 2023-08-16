@@ -1,3 +1,19 @@
+# Local Variables : 
+locals {
+  project_name       = "Terraforming"
+  default_region     = "us-east-1a"
+  ami                = "ami-08a52ddb321b32a8c"
+  type               = "t2.micro"
+  vpc_module_version = "5.1.1"
+  ec2_module_version = "5.2.1"
+
+  tags = {
+    Name = "Amazon Ubuntu"
+    Env  = "Dev"
+  }
+}
+
+# Input Variables
 variable "vpc_name" {
   description = "Name of VPC"
   type        = string

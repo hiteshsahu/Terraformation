@@ -7,20 +7,6 @@ key2 = "another value"
 **/
 
 
-# Local Variables : 
-locals {
-  project_name   = "Terraforming"
-  default_region = "us-east-1a"
-  ami            = "ami-08a52ddb321b32a8c"
-  type           = "t2.micro"
-  tags = {
-    Name = "Amazon Ubuntu"
-    Env  = "Dev"
-  }
-  # subnet = "subnet-76a8163a"
-  # nic    = aws_network_interface.my_nic.id
-}
-
 # Create a VPC
 resource "aws_vpc" "prod-vpc" {
   cidr_block = "10.0.0.0/16"
@@ -56,26 +42,6 @@ resource "aws_route_table" "prod-route-table" {
   }
 }
 
-# Subnet within VPC
-variable "subnet_blocks" {
-  type = map(object({
-    name       = string,
-    cidr_block = string
-  }))
-  default = {
-    "prod" = {
-      name       = "prod_subnet",
-      cidr_block = "10.0.1.0/24"
-    },
-    "dev" = {
-      name       = "dev_subnet",
-      cidr_block = "10.0.2.0/24"
-    },
-    "qa" = {
-      name       = "qa_subnet",
-      cidr_block = "10.0.3.0/24"
-  } }
-}
 
 # Create Subnet within VPC using for_each on Map
 resource "aws_subnet" "prod_subnet" {
@@ -187,25 +153,6 @@ resource "aws_instance" "web" {
 }
 
 
-# OutPut: https://developer.hashicorp.com/terraform/language/values/outputs
-output "instance_public_ip" {
-  description = "Public IP address of the EC2 instance"
-  value       = [for instance in aws_instance.web : instance.public_ip]
-}
-
-output "instance_private_ip" {
-  description = "Private IP address of the EC2 instance"
-  value = {
-    for key, instance in aws_instance.web : key => instance.private_ip
-  }
-}
-
-output "instance_id" {
-  description = "instance ID of the EC2 instance"
-  value = {
-    for key, instance in aws_instance.web : key => instance.id
-  }
-}
 
 # # Create users using for_each on set
 # resource "aws_iam_user" "the-accounts" {
