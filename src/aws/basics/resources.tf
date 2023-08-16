@@ -37,7 +37,6 @@ resource "aws_internet_gateway" "prod-gw" {
   }
 }
 
-
 # Create Custom Route Table for Internet Gateway of VPC
 resource "aws_route_table" "prod-route-table" {
   vpc_id = aws_vpc.prod-vpc.id
@@ -170,6 +169,7 @@ resource "aws_instance" "web" {
   ami           = local.ami
   instance_type = local.type
   tags          = local.tags
+  key_name      = "main-key"  # Refereence with access Key PEM fileform console
 
   network_interface {
     network_interface_id = each.value.id
