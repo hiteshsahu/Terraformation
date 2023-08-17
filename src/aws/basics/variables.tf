@@ -14,6 +14,15 @@ locals {
   # nic    = aws_network_interface.my_nic.id
 }
 
+
+variable "user_information" {
+  type = object({
+    name    = string
+    address = string
+  })
+  sensitive = true
+}
+
 # Input Variables:  like function arguments.
 # https://developer.hashicorp.com/terraform/language/values/variables
 # Subnet within VPC

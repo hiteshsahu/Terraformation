@@ -5,8 +5,6 @@ key = "value"
 key2 = "another value" 
 }
 **/
-
-
 # Create a VPC
 resource "aws_vpc" "prod-vpc" {
   cidr_block = "10.0.0.0/16"
@@ -41,7 +39,6 @@ resource "aws_route_table" "prod-route-table" {
     Name = "prod route table ${local.project_name}"
   }
 }
-
 
 # Create Subnet within VPC using for_each on Map
 resource "aws_subnet" "prod_subnet" {

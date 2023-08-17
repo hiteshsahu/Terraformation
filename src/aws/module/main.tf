@@ -27,7 +27,6 @@
 # }
 # 
 
-
 # Create VPC usi9ng AWS module: 
 # https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest
 module "vpc" {
@@ -70,11 +69,9 @@ module "ec2_instances" {
 
 # Local module "website_s3_bucket" {
 module "website_s3_bucket" {
-  source = "./modules/aws-s3-static-website-bucket"
-
-  bucket_name = "SimpleBucket"
-
-  tags = local.common_tags
+  source      = "./modules/aws-s3-static-website-bucket"
+  bucket_name = var.s3_bucket_name
+  tags        = local.common_tags
 }
 
 
