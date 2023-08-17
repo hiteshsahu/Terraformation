@@ -67,3 +67,14 @@ module "ec2_instances" {
 
   tags = local.tags
 }
+
+# Local module "website_s3_bucket" {
+module "website_s3_bucket" {
+  source = "./modules/aws-s3-static-website-bucket"
+
+  bucket_name = "SimpleBucket"
+
+  tags = local.common_tags
+}
+
+
