@@ -10,3 +10,19 @@ Initialize Provider & Modules
 
 Provision the infrastructure
 > terraform apply -auto-apply
+
+Upload Files
+
+        aws s3 cp modules/aws-s3-static-website-bucket/www/ s3://$(terraform output -raw website_bucket_name)/ --recursive
+        upload: modules/aws-s3-static-website-bucket/www/error.html to s3://robin-test-2020-01-15/error.html
+        upload: modules/aws-s3-static-website-bucket/www/index.html to s3://robin-test-2020-01-15 /index.html
+
+
+Delete files
+
+        aws s3 rm s3://$(terraform output -raw website_bucket_name)/ --recursive
+        delete: s3://robin-test-2020-01-15/index.html
+        delete: s3://robin-test-2020-01-15/error.html
+
+Destroy
+> terraform destroy -auto-apply
